@@ -1,4 +1,4 @@
-import numpy as np
+#import numpy as np
 import keras
 from keras import backend as K
 from keras.models import Sequential
@@ -9,8 +9,8 @@ from keras.metrics import categorical_crossentropy
 from keras.preprocessing.image import ImageDataGenerator
 from keras.layers.normalization import BatchNormalization
 from keras.layers.convolutional import *
-from matplotlib import pyplot as plt
-from sklearn.metrics import confusion_matrix
+#from matplotlib import pyplot as plt
+#from sklearn.metrics import confusion_matrix
 import itertools
 from IPython.display import display
 from PIL import Image
@@ -56,3 +56,5 @@ model.compile(Adam(lr=.0001), loss='categorical_crossentropy', metrics=['accurac
 
 model.fit_generator(train_batches, steps_per_epoch=6,
                     validation_data=validate_batches, validation_steps=5, epochs=5, verbose=2)
+
+model.save('spectrogram_classifier.h5')
