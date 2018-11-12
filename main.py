@@ -37,8 +37,8 @@ model.fit_generator(train_batches, steps_per_epoch=6,
                     validation_data=validate_batches, validation_steps=5, epochs=5, verbose=2)
 '''
 
-vgg16_model = keras.applications.vgg16.VGG16()
-vgg16_model.summary()
+vgg16_model = keras.applications.vgg16.VGG16(weights=None,classes=5,input_shape=(640,480,3))
+print(vgg16_model.summary())
 
 model = Sequential()
 
