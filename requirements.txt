@@ -1,0 +1,12 @@
+keras
+numpy
+matplotlib
+sklearn
+scipy
+selenium
+thinkx
+progress
+tensorflow
+pillow
+IPython
+certifi
