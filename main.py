@@ -1,60 +1,98 @@
-#import numpy as np
-import keras
-from keras import backend as K
-from keras.models import Sequential
-from keras.layers import Activation
-from keras.layers.core import Dense, Flatten
-from keras.optimizers import Adam
-from keras.metrics import categorical_crossentropy
-from keras.preprocessing.image import ImageDataGenerator
-from keras.layers.normalization import BatchNormalization
-from keras.layers.convolutional import *
-#from matplotlib import pyplot as plt
-#from sklearn.metrics import confusion_matrix
-import itertools
-from IPython.display import display
-from PIL import Image
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout, LSTM
+import scipy.io.wavfile as wf
+import numpy as np
+import os
 
-train_path = 'dataset/train'
-test_path = 'dataset/test'
-validate_path = 'dataset/validate'
+# Used to shuffle the contents of 
+def shuffle_in_unison_scary(a, b):
+    rng_state = np.random.get_state()
+    np.random.shuffle(a)
+    np.random.set_state(rng_state)
+    np.random.shuffle(b)
 
-train_batches = ImageDataGenerator().flow_from_directory(train_path, target_size=(640, 480), classes=['are', 'get', 'has', 'is', 'know'], batch_size=10)
-validate_batches = ImageDataGenerator().flow_from_directory(validate_path, target_size=(640, 480), classes=['are', 'get', 'has', 'is', 'know'], batch_size=5)
-test_batches = ImageDataGenerator().flow_from_directory(test_path, target_size=(640, 480), classes=['are', 'get', 'has', 'is', 'know'], batch_size=5)
+# Define the base directory of our project
+basedir = os.path.abspath(os.path.dirname(__file__))
 
-imgs, labels = next(train_batches)
+# Create master list
+x_all = list([])
+y_all = list()
 
-'''
-model = Sequential([
-    Conv2D(32, (3, 3), activation='relu', input_shape=(640, 480, 3)),
-    Flatten(),
-    Dense(5, activation='softmax')
-])
+# Create temp list, this is where our memmap info will be stored
+temp_list = list()
 
-model.compile(Adam(lr=.0001), loss='categorical_crossentropy', metrics=['accuracy'])
-model.fit_generator(train_batches, steps_per_epoch=6,
-                    validation_data=validate_batches, validation_steps=5, epochs=5, verbose=2)
-'''
+# List of folders in the test directory
+words = os.listdir(basedir + '/dataset')
 
-vgg16_model = keras.applications.vgg16.VGG16(weights=None,classes=5,input_shape=(640,480,3))
-print(vgg16_model.summary())
+# Iterate through each directory
+for word in words:
+
+    # Grab all wav files from each directory
+    all_wav = os.listdir(basedir + '/dataset/{}'.format(word))
+
+    # Open each wav file, dump contents, and record y value
+    for wav in all_wav:
+        freq, data = wf.read(basedir + '/dataset/{}/'.format(word) + wav, 'rb')
+
+        # Each audio clip will be 2 seconds long
+        for i in range(44100):
+            try:
+                temp_list.append(data[i])
+            except:
+                temp_list.append(0)
+            
+        # Append a deep copy of the temp list to the x_train list and clear temp_list
+        x_all.append(temp_list[:])
+        temp_list.clear()
+
+        # Append the word corresponding to the wav file to the y_train list
+        y_all.append(word)
+
+# Shuffle all elements in both array at the same time
+shuffle_in_unison_scary(x_all, y_all)
+
+# Put in the first 90 elements from the array into training lists
+x_train_arr = x_all[:90]
+y_train_arr = y_all[:90]
+
+# Put in the last 10 elements from the array into testing lists
+x_test_arr = x_all[90:]
+y_test_arr = y_all[90:]
+
+# Cast these lists into numpy arrays so they play nicely with tensorflow
+x_train = np.array(x_train_arr)
+y_train = np.array(y_train_arr)
+
+x_test = np.array(x_test_arr)
+y_test = np.array(y_test_arr)
+
+print(x_test)
+
+
+# mnist = tf.keras.datasets.mnist
+# (x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+# print(x_train.shape[1:])
+
 
 model = Sequential()
 
-for layer in vgg16_model.layers:
-    model.add(layer)
+model.add(LSTM(128, input_shape=(44100, 1), activation='relu', return_sequences=True))
+model.add(Dropout(0.2))
 
-model.layers.pop()
+model.add(LSTM(128, activation='relu'))
+model.add(Dropout(0.2))
 
-for layer in model.layers:
-    layer.trainable = False
+model.add(Dense(32, activation='relu'))
+model.add(Dropout(0.2))
 
-model.add(Dense(5, activation='softmax'))
+model.add(Dense(32, activation='softmax'))
 
-model.compile(Adam(lr=.0001), loss='categorical_crossentropy', metrics=['accuracy'])
+opt = tf.keras.optimizers.Adam(lr=1e-3, decay=1e-5)
 
-model.fit_generator(train_batches, steps_per_epoch=6,
-                    validation_data=validate_batches, validation_steps=5, epochs=5, verbose=2)
+model.compile(loss='sparse_categorical_crossentropy', 
+                optimizer=opt, 
+                metrics=['accuracy'])
 
-model.save('spectrogram_classifier.h5')
+model.fit(x_train, y_train, epochs=3, validation_data=(x_test, y_test))

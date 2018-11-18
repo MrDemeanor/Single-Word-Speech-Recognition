@@ -10,3 +10,4 @@ tensorflow
 pillow
 IPython
 certifi
+tflearn
