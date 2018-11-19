@@ -5,6 +5,11 @@ import scipy.io.wavfile as wf
 import numpy as np
 import os
 
+the_max = 32767
+the_min = -32768
+the_average = (the_max + the_min) / 2
+the_range = (the_max - the_min) / 2
+
 # Used to shuffle the contents of 
 def shuffle_in_unison_scary(a, b):
     rng_state = np.random.get_state()
@@ -41,7 +46,9 @@ for word in words:
             temp_list.append([])
             for j in range(210):
                 try:
-                    temp_list[i].append(data[wav_counter])
+                    current_num = data[wav_counter]
+                    normalized_value = (current_num - the_average) / the_range
+                    temp_list[i].append(normalized_value)
                 except:
                     temp_list[i].append(0)
                 
@@ -59,12 +66,12 @@ for word in words:
 shuffle_in_unison_scary(x_all, y_all)
 
 # Put in the first 90 elements from the array into training lists
-x_train_arr = x_all[:90]
-y_train_arr = y_all[:90]
+x_train_arr = x_all[:150]
+y_train_arr = y_all[:150]
 
 # Put in the last 10 elements from the array into testing lists
-x_test_arr = x_all[90:]
-y_test_arr = y_all[90:]
+x_test_arr = x_all[150:]
+y_test_arr = y_all[150:]
 
 # Cast these lists into numpy arrays so they play nicely with tensorflow
 x_train = np.array(x_train_arr)
@@ -73,10 +80,16 @@ y_train = np.array(y_train_arr)
 x_test = np.array(x_test_arr)
 y_test = np.array(y_test_arr)
 
+# print(x_train.shape)
+# print(y_train.shape)
+# print(x_test.shape)
+# print(y_test.shape)
+# print(y_test)
+
 # mnist = tf.keras.datasets.mnist
 # (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
-# print(x_train.shape[1:])
+# print(y_train.shape)
 
 
 model = Sequential()
@@ -98,4 +111,4 @@ model.compile(loss='sparse_categorical_crossentropy',
                 optimizer=opt, 
                 metrics=['accuracy'])
 
-model.fit(x_train, y_train, epochs=3, validation_data=(x_test, y_test))
+model.fit(x_train, y_train, epochs=40, validation_data=(x_test, y_test))
