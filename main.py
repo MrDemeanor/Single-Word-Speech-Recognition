@@ -20,7 +20,7 @@ x_all = list([])
 y_all = list()
 
 # Create temp list, this is where our memmap info will be stored
-temp_list = list()
+temp_list = []
 
 # List of folders in the test directory
 words = os.listdir(basedir + '/dataset')
@@ -35,21 +35,27 @@ for word in words:
     for wav in all_wav:
         freq, data = wf.read(basedir + '/dataset/{}/'.format(word) + wav, 'rb')
 
+        wav_counter = 0
         # Each audio clip will be 2 seconds long
-        for i in range(44100):
-            try:
-                temp_list.append(data[i])
-            except:
-                temp_list.append(0)
+        for i in range(210):
+            temp_list.append([])
+            for j in range(210):
+                try:
+                    temp_list[i].append(data[wav_counter])
+                except:
+                    temp_list[i].append(0)
+                
+                wav_counter += 1
             
         # Append a deep copy of the temp list to the x_train list and clear temp_list
         x_all.append(temp_list[:])
         temp_list.clear()
 
         # Append the word corresponding to the wav file to the y_train list
-        y_all.append(word)
+        y_all.append(words.index(word))
 
-# Shuffle all elements in both array at the same time
+
+# Shuffle all elements in both arrays at the same time
 shuffle_in_unison_scary(x_all, y_all)
 
 # Put in the first 90 elements from the array into training lists
@@ -67,9 +73,6 @@ y_train = np.array(y_train_arr)
 x_test = np.array(x_test_arr)
 y_test = np.array(y_test_arr)
 
-print(x_test)
-
-
 # mnist = tf.keras.datasets.mnist
 # (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
@@ -78,7 +81,7 @@ print(x_test)
 
 model = Sequential()
 
-model.add(LSTM(128, input_shape=(44100, 1), activation='relu', return_sequences=True))
+model.add(LSTM(128, input_shape=(x_test.shape[1:]), activation='relu', return_sequences=True))
 model.add(Dropout(0.2))
 
 model.add(LSTM(128, activation='relu'))
@@ -87,7 +90,7 @@ model.add(Dropout(0.2))
 model.add(Dense(32, activation='relu'))
 model.add(Dropout(0.2))
 
-model.add(Dense(32, activation='softmax'))
+model.add(Dense(2, activation='softmax'))
 
 opt = tf.keras.optimizers.Adam(lr=1e-3, decay=1e-5)
 
