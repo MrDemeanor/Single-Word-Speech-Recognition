@@ -34,6 +34,12 @@
     <h3>Recordings</h3>
     <ol id="recordingsList"></ol>
 
+    <h1>File Uploader</h1>
+    <form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept="audio/*">
+        <input type="submit" value="send">
+    </form>
+
     <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
     <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
     <script src="{{ url_for('static', filename='js/app.js')}}"></script>
