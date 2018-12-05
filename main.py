@@ -4,97 +4,71 @@ from tensorflow.keras.layers import Dense, Dropout, LSTM
 import scipy.io.wavfile as wf
 import numpy as np
 import os
-
-the_max = 32767
-the_min = -32768
-the_average = (the_max + the_min) / 2
-the_range = (the_max - the_min) / 2
-
-# Used to shuffle the contents of 
-def shuffle_in_unison_scary(a, b):
-    rng_state = np.random.get_state()
-    np.random.shuffle(a)
-    np.random.set_state(rng_state)
-    np.random.shuffle(b)
+from PIL import Image
+import random
 
 # Define the base directory of our project
 basedir = os.path.abspath(os.path.dirname(__file__))
-
-# Create master list
-x_all = list([])
-y_all = list()
 
 # Create temp list, this is where our memmap info will be stored
 temp_list = []
 
 # List of folders in the test directory
-words = os.listdir(basedir + '/dataset')
+words = os.listdir(basedir + '/dataset/have_png')
 
-# Iterate through each directory
 for word in words:
+    img = Image.open('dataset/have_png/' + word)
+    my_list = list(img.getdata())
+    my_list_reshaped = np.reshape(my_list, (210, 210))
+    temp_list.append(tuple((my_list_reshaped, 0)))
 
-    # Grab all wav files from each directory
-    all_wav = os.listdir(basedir + '/dataset/{}'.format(word))
+# List of folders in the test directory
+words = os.listdir(basedir + '/dataset/thing_png')
 
-    # Open each wav file, dump contents, and record y value
-    for wav in all_wav:
-        freq, data = wf.read(basedir + '/dataset/{}/'.format(word) + wav, 'rb')
+for word in words:
+    img = Image.open('dataset/thing_png/' + word)
+    my_list = list(img.getdata())
+    my_list_reshaped = np.reshape(my_list, (210, 210))
+    temp_list.append(tuple((my_list_reshaped, 1)))
 
-        wav_counter = 0
-        # Each audio clip will be 2 seconds long
-        for i in range(210):
-            temp_list.append([])
-            for j in range(210):
-                try:
-                    current_num = data[wav_counter]
-                    normalized_value = (current_num - the_average) / the_range
-                    temp_list[i].append(normalized_value)
-                except:
-                    temp_list[i].append(0)
-                
-                wav_counter += 1
-            
-        # Append a deep copy of the temp list to the x_train list and clear temp_list
-        x_all.append(temp_list[:])
-        temp_list.clear()
+random.shuffle(temp_list)
 
-        # Append the word corresponding to the wav file to the y_train list
-        y_all.append(words.index(word))
+temp_array = np.array(temp_list)
 
+x_train_list = list()
+x_test_list = list()
+y_train_list = list()
+y_test_list = list()
 
-# Shuffle all elements in both arrays at the same time
-shuffle_in_unison_scary(x_all, y_all)
+for i in range(180):
+    x_train_list.append(temp_list[i][0])
 
-# Put in the first 90 elements from the array into training lists
-x_train_arr = x_all[:150]
-y_train_arr = y_all[:150]
+for i in range(180):
+    y_train_list.append(temp_list[i][1])
 
-# Put in the last 10 elements from the array into testing lists
-x_test_arr = x_all[150:]
-y_test_arr = y_all[150:]
+for i in range(180, temp_list.__len__()):
+    x_test_list.append(temp_list[i][0])
 
-# Cast these lists into numpy arrays so they play nicely with tensorflow
-x_train = np.array(x_train_arr)
-y_train = np.array(y_train_arr)
+for i in range(180, temp_list.__len__()):
+    y_test_list.append(temp_list[i][1])
 
-x_test = np.array(x_test_arr)
-y_test = np.array(y_test_arr)
+x_train = np.array(x_train_list)
+y_train = np.array(y_train_list)
+x_test = np.array(x_test_list)
+y_test = np.array(y_test_list)
 
-# print(x_train.shape)
-# print(y_train.shape)
-# print(x_test.shape)
-# print(y_test.shape)
-# print(y_test)
+x_train = x_train / 255
+x_test = x_test / 255
 
-# mnist = tf.keras.datasets.mnist
-# (x_train, y_train), (x_test, y_test) = mnist.load_data()
-
-# print(y_train.shape)
+print('x_train shape: {}'.format(x_train.shape))
+print('y_train shape: {}'.format(y_train.shape))
+print('x_test shape: {}'.format(x_test.shape))
+print('y_test shape: {}'.format(y_test.shape))
 
 
 model = Sequential()
 
-model.add(LSTM(128, input_shape=(x_test.shape[1:]), activation='relu', return_sequences=True))
+model.add(LSTM(128, input_shape=(x_train.shape[1:]), activation='relu', return_sequences=True))
 model.add(Dropout(0.2))
 
 model.add(LSTM(128, activation='relu'))
@@ -103,9 +77,15 @@ model.add(Dropout(0.2))
 model.add(Dense(32, activation='relu'))
 model.add(Dropout(0.2))
 
+model.add(Dense(64, activation='relu'))
+model.add(Dropout(0.2))
+
+model.add(Dense(32, activation='relu'))
+model.add(Dropout(0.2))
+
 model.add(Dense(2, activation='softmax'))
 
-opt = tf.keras.optimizers.Adam(lr=1e-3, decay=1e-5)
+opt = tf.keras.optimizers.Adam(lr=1e-5, decay=1e-4)
 
 model.compile(loss='sparse_categorical_crossentropy', 
                 optimizer=opt, 

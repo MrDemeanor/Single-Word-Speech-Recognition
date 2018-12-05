@@ -13,6 +13,7 @@ bar = Bar('Adding ' + sys.argv[1] + ' to the dataset', fill='=', suffix='%(perce
 # Initialize chrome web browser
 driver = webdriver.Chrome()
 
+'''
 # Go to the website
 driver.get("https://lingojam.com/RobotVoiceGenerator")
 
@@ -80,4 +81,25 @@ for file in files:
             print('Whoops!')
 
 bar.finish()
+'''
+# Go to the website
+driver.get("https://www.text2speech.org/")
+
+# Input a word into the text box so we can generate waveforms
+input_word = driver.find_element_by_id("textarea-text")
+input_word.send_keys(sys.argv[1])
+
+# Select a gender
+select_gender = driver.find_element_by_id("selectVoice")
+select_gender.click()
+
+select_gender.send_keys(Keys.ARROW_UP)
+select_gender.send_keys(Keys.ARROW_UP)
+
+submit_button = driver.find_element_by_id("fbut")
+submit_button.click()
+
+audio_download = driver.find_element_by_xpath('//*[@id="download-result"]/a[2]')
+audio_download.click()
+
 driver.close()
