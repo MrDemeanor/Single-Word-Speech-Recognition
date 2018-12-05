@@ -130,42 +130,42 @@ function createDownloadLink(blob) {
 	au.src = url;
 
 	//save to disk link
-	link.href = url;
-	link.download = filename+".wav"; //download forces the browser to donwload the file using the  filename
-	link.innerHTML = "Save to disk";
+	// link.href = url;
+	// link.download = filename+".wav"; //download forces the browser to donwload the file using the  filename
+	// link.innerHTML = "Save to disk";
 
 	//add the new audio element to li
 	li.appendChild(au);
 	
 	//add the filename to the li
-	li.appendChild(document.createTextNode(filename+".wav "))
+	// li.appendChild(document.createTextNode(filename+".wav "))
 
 	//add the save to disk link to li
-	li.appendChild(link);
+	// li.appendChild(link);
 	
 	//upload link
-	var upload = document.createElement('a');
-	upload.href="#";
-	upload.innerHTML = "Upload";
-	upload.addEventListener("click", function(event){
-		  var xhr=new XMLHttpRequest();
-		  xhr.onload=function(e) {
-		      if(this.readyState === 4) {
-		          console.log("Server returned: ",e.target.responseText);
-		      }
-		  };
-		  var fd=new FormData();
-		  fd.append("audio_data",blob, filename);
-		  xhr.open("POST","/upload",true);
-		  $.ajax({
-			  url:'/upload', 
-			  type: 'POST', 
-			  data: fd, 
-			  contentType: false, 
-			  processData: false
-		  })
-		  xhr.send(fd);
-	})
+	// var upload = document.createElement('a');
+	// upload.href="#";
+	// upload.innerHTML = "Upload";
+	// upload.addEventListener("click", function(event){
+	// 	  var xhr=new XMLHttpRequest();
+	// 	  xhr.onload=function(e) {
+	// 	      if(this.readyState === 4) {
+	// 	          console.log("Server returned: ",e.target.responseText);
+	// 	      }
+	// 	  };
+	// 	  var fd=new FormData();
+	// 	  fd.append("audio_data",blob, filename);
+	// 	  xhr.open("POST","/upload",true);
+	// 	  $.ajax({
+	// 		  url:'/upload', 
+	// 		  type: 'POST', 
+	// 		  data: fd, 
+	// 		  contentType: false, 
+	// 		  processData: false
+	// 	  })
+	// 	  xhr.send(fd);
+	// })
 	li.appendChild(document.createTextNode (" "))//add a space in between
 	li.appendChild(upload)//add the upload link to li
 
