@@ -7,7 +7,6 @@ import string
 import random
 from random import randint
 from progress.bar import Bar
-import librosa
 
 bar = Bar('Adding ' + sys.argv[1] + ' to the dataset', fill='=', suffix='%(percent)d%%')
 

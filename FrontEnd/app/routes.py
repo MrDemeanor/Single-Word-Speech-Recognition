@@ -8,7 +8,6 @@ import os
 from scipy.signal import resample as rs
 import argparse
 import sys
-import librosa
 import wave
 import time
 
@@ -90,12 +89,18 @@ def upload():
         os.mkdir(target)
     
     for file in request.files.getlist("file"):
+        file.filename = 'audio.wav'
         filename = file.filename
         print(filename)
         destination = "/" + target + filename
         print(destination)
+
         file.save(destination)
-        # time.sleep(2)
+        os.system("sox FrontEnd/app/audio_upload/audio.wav -r 22050 FrontEnd/app/audio_upload/outfile.l.wav remix 1")
+        time.sleep(2)
+        label_wav('FrontEnd/app/audio_upload/outfile.l.wav', '/tmp/speech_commands_train/conv_labels.txt', '/tmp/my_frozen_graph.pb', 'wav_data:0', 'labels_softmax:0', 3)
+        os.remove('FrontEnd/app/audio_upload/audio.wav')
+        os.remove('FrontEnd/app/audio_upload/outfile.l.wav')
         # y, sr = librosa.load(destination, 22050, duration=2)
         # librosa.output.write_wav('//Users/brentredmon/Documents/School/Fall_2018/ML/Final_Project/FrontEnd/app/audio_upload/test.wav', y, sr)
 

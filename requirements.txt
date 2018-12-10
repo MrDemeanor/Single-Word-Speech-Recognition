@@ -13,3 +13,4 @@ certifi
 tflearn
 pypng
 flask
+sox

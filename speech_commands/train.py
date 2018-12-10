@@ -359,7 +359,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--sample_rate',
       type=int,
-      default=44100,
+      default=22050,
       help='Expected sample rate of the wavs',)
   parser.add_argument(
       '--clip_duration_ms',
