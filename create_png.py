@@ -8,16 +8,17 @@ import wave
 
 count = 0
 
-files = os.listdir('dataset/thing')
+files = os.listdir('/Users/brentredmon/Documents/School/Fall_2018/ML/Final_Project/dataset/get')
 for file in files:
     print(file)
     
     try:
-        audio = wave.open('dataset/thing/' + file, 'rb')
+        audio = wave.open('/Users/brentredmon/Documents/School/Fall_2018/ML/Final_Project/dataset/get/' + file, 'rb')
         frames = audio.getnframes()
         audio_bytes = audio.readframes(frames)
 
         image_1D = list(audio_bytes)
+        print(image_1D)
 
         for i in range(44100 - len(image_1D)):
             try:
@@ -27,8 +28,8 @@ for file in files:
 
         image_2D = np.reshape(image_1D, (210, 210))
 
-        imsave('dataset/thing_png/' + str(count) + '.png', image_2D)
-        
+        imsave('test.jpg', image_2D)
+        print('hi')
         count += 1
     
     except:

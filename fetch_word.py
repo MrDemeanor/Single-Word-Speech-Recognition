@@ -7,13 +7,12 @@ import string
 import random
 from random import randint
 from progress.bar import Bar
+import librosa
 
 bar = Bar('Adding ' + sys.argv[1] + ' to the dataset', fill='=', suffix='%(percent)d%%')
 
 # Initialize chrome web browser
 driver = webdriver.Chrome()
-
-'''
 # Go to the website
 driver.get("https://lingojam.com/RobotVoiceGenerator")
 
@@ -39,7 +38,7 @@ for x in range(0, 100):
     bar.next()
     speak.click()
     # Change the name of each downloaded file every 50 downloads
-    if x % 50 == 0:
+    if x % 50 == 0 and x is not 0:
         files = os.listdir('/Users/brentredmon/Downloads')
         for file in files:
             if(file[:5] == 'audio' and "download" not in file and "html" not in file):
@@ -81,25 +80,18 @@ for file in files:
             print('Whoops!')
 
 bar.finish()
-'''
-# Go to the website
-driver.get("https://www.text2speech.org/")
-
-# Input a word into the text box so we can generate waveforms
-input_word = driver.find_element_by_id("textarea-text")
-input_word.send_keys(sys.argv[1])
-
-# Select a gender
-select_gender = driver.find_element_by_id("selectVoice")
-select_gender.click()
-
-select_gender.send_keys(Keys.ARROW_UP)
-select_gender.send_keys(Keys.ARROW_UP)
-
-submit_button = driver.find_element_by_id("fbut")
-submit_button.click()
-
-audio_download = driver.find_element_by_xpath('//*[@id="download-result"]/a[2]')
-audio_download.click()
 
 driver.close()
+
+# files = os.listdir('/Users/brentredmon/Downloads')
+# os.mkdir('/Users/brentredmon/Documents/School/Fall_2018/ML/Final_Project/dataset/' + sys.argv[1])
+# counter = 0
+# for file in files:
+#     try:
+#         if file[0] is not '.':
+#             link = '/Users/brentredmon/Downloads/' + file
+#             y, sr = librosa.load(link, 44100, duration=2.0)
+#             librosa.output.write_wav('/Users/brentredmon/Documents/School/Fall_2018/ML/Final_Project/dataset/' + str(sys.argv[1]) + '/' + str(counter) + '.wav', y, sr)
+#             counter += 1
+#     except:
+#         print('Messed up on file ' + file)

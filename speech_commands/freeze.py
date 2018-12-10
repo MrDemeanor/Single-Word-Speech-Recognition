@@ -149,12 +149,12 @@ if __name__ == '__main__':
   parser.add_argument(
       '--sample_rate',
       type=int,
-      default=16000,
+      default=44100,
       help='Expected sample rate of the wavs',)
   parser.add_argument(
       '--clip_duration_ms',
       type=int,
-      default=1000,
+      default=2000,
       help='Expected duration in milliseconds of the wavs',)
   parser.add_argument(
       '--clip_stride_ms',
@@ -190,7 +190,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--wanted_words',
       type=str,
-      default='yes,no,up,down,left,right,on,off,stop,go',
+      default='get,put',
       help='Words to use (others will be added to an unknown label)',)
   parser.add_argument(
       '--output_file', type=str, help='Where to save the frozen graph.')

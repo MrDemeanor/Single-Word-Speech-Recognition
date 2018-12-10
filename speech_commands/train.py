@@ -359,12 +359,12 @@ if __name__ == '__main__':
   parser.add_argument(
       '--sample_rate',
       type=int,
-      default=16000,
+      default=44100,
       help='Expected sample rate of the wavs',)
   parser.add_argument(
       '--clip_duration_ms',
       type=int,
-      default=1000,
+      default=2000,
       help='Expected duration in milliseconds of the wavs',)
   parser.add_argument(
       '--window_size_ms',
@@ -385,7 +385,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--how_many_training_steps',
       type=str,
-      default='1000,200',
+      default='15000,3000',
       help='How many training loops to run',)
   parser.add_argument(
       '--eval_step_interval',
