@@ -24,13 +24,39 @@
             </div>
         </div>
     </nav>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Prediction</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {% if prediction_array %}
+                        <div>We are {{ '{:.2f}'.format(prediction_array[0][1] * 100) }}&percnt; certain that you said <b>{{ prediction_array[0][0] }}</b></div>
+                    {% else %}
+                        <div>Not uploaded properly</div>
+                    {% endif %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="jumbotron pulse animated" style="filter: blur(0px) saturate(121%);">
             <h1 class="text-center">Single Word Speech Recognition</h1>
-            <p class="text-center">This model is trained on a very small dictionary of words. Record your voice, save the 
+            <p class="text-center">This model is trained on a very small dictionary of words. Record your voice, save
+                the
                 file, and then upload it to our server so we can predict what you said</p>
             </p>
-            
+
             <hr>
 
             <div class="text-center" id="controls">
@@ -50,6 +76,8 @@
                 <input type="submit" value="send">
             </form>
 
+
+
             <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
             <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
             <script src="{{ url_for('static', filename='js/app.js')}}"></script>
@@ -58,6 +86,14 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+
+    {% if prediction_array %}
+        <script type="text/javascript">
+            $(window).on('load', function () {
+                $('#exampleModal').modal('show');
+            });
+        </script>
+    {% endif %}
 </body>
 
 </html>

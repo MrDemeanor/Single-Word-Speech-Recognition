@@ -10,6 +10,7 @@ import argparse
 import sys
 import wave
 import time
+import copy
 
 import tensorflow as tf
 
@@ -31,6 +32,7 @@ def load_labels(filename):
   """Read in labels, one label per line."""
   return [line.rstrip() for line in tf.gfile.GFile(filename)]
 
+prediction_array = []
 
 def run_graph(wav_data, labels, input_layer_name, output_layer_name,
               num_top_predictions):
@@ -43,13 +45,20 @@ def run_graph(wav_data, labels, input_layer_name, output_layer_name,
     softmax_tensor = sess.graph.get_tensor_by_name(output_layer_name)
     predictions, = sess.run(softmax_tensor, {input_layer_name: wav_data})
 
+    prediction_array.clear()
+
     # Sort to show labels in order of confidence
     top_k = predictions.argsort()[-num_top_predictions:][::-1]
     for node_id in top_k:
       human_string = labels[node_id]
       score = predictions[node_id]
+      this_tuple = (human_string, score)
+      prediction_array.append(this_tuple)
       print('%s (score = %.5f)' % (human_string, score))
-
+    
+    print('\n')
+    print(prediction_array)
+    
     return 0
 
 
@@ -81,30 +90,51 @@ def index():
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
+    try:
+      os.remove('FrontEnd/app/audio_upload/audio.wav')
+      os.remove('FrontEnd/app/audio_upload/outfile.l.wav')
+    except:
+      print('Cannot delete file')
     target = os.path.join(basedir, 'audio_upload/')
     destination = ''
     print(target)
 
     if not os.path.isdir(target):
         os.mkdir(target)
-    
-    for file in request.files.getlist("file"):
-        file.filename = 'audio.wav'
-        filename = file.filename
-        print(filename)
-        destination = "/" + target + filename
-        print(destination)
 
-        file.save(destination)
-        os.system("sox FrontEnd/app/audio_upload/audio.wav -r 22050 FrontEnd/app/audio_upload/outfile.l.wav remix 1")
-        time.sleep(2)
-        label_wav('FrontEnd/app/audio_upload/outfile.l.wav', '/tmp/speech_commands_train/conv_labels.txt', '/tmp/my_frozen_graph.pb', 'wav_data:0', 'labels_softmax:0', 3)
-        os.remove('FrontEnd/app/audio_upload/audio.wav')
-        os.remove('FrontEnd/app/audio_upload/outfile.l.wav')
+    file = request.files.getlist("file")[0]
+
+    file.filename = 'audio.wav'
+    filename = file.filename
+    print(filename)
+    destination = "/" + target + filename
+    print(destination)
+
+    file.save(destination)
+    os.system("sox FrontEnd/app/audio_upload/audio.wav -r 22050 FrontEnd/app/audio_upload/outfile.l.wav remix 1")
+
+    time.sleep(2)
+
+    label_wav('FrontEnd/app/audio_upload/outfile.l.wav', '/tmp/speech_commands_train/conv_labels.txt', '/tmp/my_frozen_graph.pb', 'wav_data:0', 'labels_softmax:0', 3)
+
+    return render_template('index.html', prediction_array=prediction_array)
+    
+    # for file in request.files.getlist("file"):
+    #     file.filename = 'audio.wav'
+    #     filename = file.filename
+    #     print(filename)
+    #     destination = "/" + target + filename
+    #     print(destination)
+
+    #     file.save(destination)
+    #     os.system("sox FrontEnd/app/audio_upload/audio.wav -r 22050 FrontEnd/app/audio_upload/outfile.l.wav remix 1")
+        
+    #     time.sleep(2)
+        
+    #     return label_wav('FrontEnd/app/audio_upload/outfile.l.wav', '/tmp/speech_commands_train/conv_labels.txt', '/tmp/my_frozen_graph.pb', 'wav_data:0', 'labels_softmax:0', 3)
+
         # y, sr = librosa.load(destination, 22050, duration=2)
         # librosa.output.write_wav('//Users/brentredmon/Documents/School/Fall_2018/ML/Final_Project/FrontEnd/app/audio_upload/test.wav', y, sr)
-
-    return render_template("uploaded_file.html")
 
 
 

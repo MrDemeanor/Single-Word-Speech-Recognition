@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
-    Uploaded????
+    {% if prediction_array %}
+        {% for prediction in prediction_array %}
+            <div>{{ prediction[0] }} has a percentage of {{ '{:.2f}'.format(prediction[1] * 100) }}</div>
+        {% endfor %}
+    {% else %}
+        <div>Not uploaded properly</div>
+    {% endif %}
 </body>
+
 </html>
