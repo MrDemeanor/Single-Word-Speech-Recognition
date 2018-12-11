@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  6 DEC 2018 13:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  11 DEC 2018 01:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -794,23 +794,26 @@ LaTeX Font Warning: Font shape `LGR/ppl/m/n' undefined
 LaTeX Font Warning: Font shape `LGR/ppl/m/it' undefined
 (Font)              using `LGR/ppl/m/n' instead on input line 921.
 
-[4]
-LaTeX Font Info:    Calculating math sizes for size <9.03374> on input line 103
-5.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9.03374> on input line 1035.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6.32358> on input line 1035.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <4.51686> on input line 1035.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1083.
- [5
+[4] [5]
+<./images/delete.png, id=120, 462.528pt x 346.896pt>
+File: ./images/delete.png Graphic file (type png)
+<use ./images/delete.png>
+Package pdftex.def Info: ./images/delete.png  used on input line 992.
+(pdftex.def)             Requested size: 185.0079pt x 138.75594pt.
+<./images/spectrogram.png, id=122, 129.48375pt x 124.465pt>
+File: ./images/spectrogram.png Graphic file (type png)
+<use ./images/spectrogram.png>
+Package pdftex.def Info: ./images/spectrogram.png  used on input line 998.
+(pdftex.def)             Requested size: 181.27599pt x 174.2498pt.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1066.
+ [6
 
-]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1083.
- (./Final_Paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1083.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1083.
+ <./images/delete.png> <./images/spectrogram.png (PNG copy)>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1066.
+
+(./Final_Paper.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1066.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1066.
 
 
 
@@ -819,21 +822,21 @@ Package rerunfilecheck Warning: File `Final_Paper.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `Final_Paper.out':
-(rerunfilecheck)             Before: F6C880677DEED685B59B3B67B4ADFCC0;1205
-(rerunfilecheck)             After:  CFB4A016B3C95CBF14B3C492C514E0A0;1252.
+(rerunfilecheck)             Before: 88613C060AB871048030248C6633465D;1069
+(rerunfilecheck)             After:  690B46F5F6BD8007C2002F7E089C9165;1140.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1083.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1066.
  ) 
 Here is how much of TeX's memory you used:
- 7249 strings out of 492649
- 113611 string characters out of 6129622
- 197492 words of memory out of 5000000
- 11010 multiletter control sequences out of 15000+600000
- 49666 words of font info for 104 fonts, out of 8000000 for 9000
+ 7232 strings out of 492649
+ 113369 string characters out of 6129622
+ 197455 words of memory out of 5000000
+ 10998 multiletter control sequences out of 15000+600000
+ 47014 words of font info for 98 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 31i,8n,28p,1081b,358s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 31i,6n,28p,1081b,311s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/te
 xlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texl
@@ -849,10 +852,10 @@ rw/helvetic/uhvro8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/pal
 atino/uplb8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/palatino/u
 plr8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/palatino/uplri8a.
 pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on Final_Paper.pdf (5 pages, 169994 bytes).
+Output written on Final_Paper.pdf (6 pages, 184840 bytes).
 PDF statistics:
- 194 PDF objects out of 1000 (max. 8388607)
- 170 compressed objects within 2 object streams
- 41 named destinations out of 1000 (max. 500000)
- 153 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 191 PDF objects out of 1000 (max. 8388607)
+ 163 compressed objects within 2 object streams
+ 37 named destinations out of 1000 (max. 500000)
+ 147 words of extra memory for PDF output out of 10000 (max. 10000000)
 

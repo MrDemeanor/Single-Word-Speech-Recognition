@@ -11,10 +11,8 @@
 \BOOKMARK [2][-]{subsection.4.1}{LSTM Recurrent Neural Network}{section.4}% 11
 \BOOKMARK [2][-]{subsection.4.2}{Spectrographic Analysis With a CNN}{section.4}% 12
 \BOOKMARK [1][-]{section.5}{Final Model}{}% 13
-\BOOKMARK [1][-]{section*.1}{Appendix A: Proof of the First Zonklar Equation}{}% 14
-\BOOKMARK [1][-]{section*.2}{Appendix B}{}% 15
-\BOOKMARK [1][-]{section*.4}{References}{}% 16
-\BOOKMARK [1][-]{IEEEbiography.0}{Biographies}{}% 17
-\BOOKMARK [2][-]{IEEEbiography.1}{Michael Shell}{IEEEbiography.0}% 18
-\BOOKMARK [2][-]{IEEEbiography.2}{John Doe}{IEEEbiography.0}% 19
-\BOOKMARK [2][-]{IEEEbiography.3}{Jane Doe}{IEEEbiography.0}% 20
+\BOOKMARK [1][-]{section.6}{Wrapping our project}{}% 14
+\BOOKMARK [2][-]{subsection.6.1}{The Flask Micro-framework}{section.6}% 15
+\BOOKMARK [2][-]{subsection.6.2}{Using the Web Service}{section.6}% 16
+\BOOKMARK [2][-]{subsection.6.3}{External Dependencies}{section.6}% 17
+\BOOKMARK [1][-]{section.7}{Conclusion}{}% 18
