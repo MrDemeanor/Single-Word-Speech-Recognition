@@ -578,7 +578,7 @@ pdfkeywords={Computer Society, IEEEtran, journal, LaTeX, paper,
 \author{Brent~Redmon,
         David~Crowe% <-this % stops a space
 % <-this % stops a space
-\thanks{Manuscript received April 19, 2005; revised December 27, 2012.}}
+}
 
 % note the % following the last \IEEEmembership and also \thanks - 
 % these prevent an unwanted space from occurring between the last author name
@@ -641,7 +641,7 @@ pdfkeywords={Computer Society, IEEEtran, journal, LaTeX, paper,
 % in the abstract or keywords.
 \IEEEtitleabstractindextext{%
 \begin{abstract}
-With the exception of SpeechCommands and SpokenVerbs, datasets consisting of single spoken words are hard to come by and can be very difficult and time consuming to assemble. Especially when acquiring such a dataset through means of volunteering, we deal with not only the issue of slow growth, but we also must trust that our volunteers are speaking the right words with respect to their associated labels. In this paper, we will discuss WordEnsemble, an application that we have developed that allows for the rapid creation of datasets consisting of single words through the LingoJam TTS (Text to Speech) service. We then test such a dataset against a pre-trained model provided by Tensorflow and wrap the service in a front end web application. 
+With the exception of SpeechCommands and SpokenVerbs, datasets consisting of single spoken words are hard to come by and can be very difficult and time consuming to assemble. Especially when acquiring such a dataset through means of volunteering, we deal with not only the issue of slow growth, but we also must trust that our volunteers are speaking the right words with respect to their associated labels. In this paper, we will discuss WordEnsemble, an application that we have developed that allows for the rapid creation of datasets consisting of single words through the LingoJam TTS (Text to Speech) service. We then test such a dataset against a pre-trained model provided by Tensorflow and wrap the service in a front end web application. All of the code can be found at \url{https://git.txstate.edu/btr26/CS4347\_VGG16\_Project.git}
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
@@ -977,7 +977,7 @@ To mitigate this, we use a command line interface called Sox, which is called fr
 
 Though we were able to achieve fantastic accuracy on our generated dataset, we believe that these numbers can be misleading. As stated in the beginning, the dataset that we generate does not have a lot of variety as to the kinds of voices that it contains. It only has a male robotic voice, which is obviously not representative of the population. This is why though our accuracy numbers are very good, the model can depict what a user is saying only some of the time. 
 
-We believe that if we were able to combine the resources of more TTS services and funnel them into a single dataset, we might be able to come closer to creating a single word audio dataset that is more representative of voices in our society. 
+We believe that if we were able to combine the resources of more TTS services and funnel them into a single dataset, we might be able to come closer to creating a single word audio dataset that is more representative of the collective voices in our population. 
 
 \begin{figure}[h]
 \caption{Spectrogram using built in Python3 libraries}
@@ -992,13 +992,13 @@ We believe that if we were able to combine the resources of more TTS services an
 \end{figure}
 
 \begin{figure}[h]
-\caption{Spectrogram built from Tensorflow}
+\caption{Categorical Cross Entropy Loss}
 \vspace{5mm}
 \includegraphics[scale=.7]{first}
 \end{figure}
 
 \begin{figure}[h]
-\caption{Spectrogram built from Tensorflow}
+\caption{Accuracy over 1400 Epochs}
 \vspace{5mm}
 \includegraphics[scale=.7]{second}
 \end{figure}
