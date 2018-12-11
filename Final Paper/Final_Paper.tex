@@ -719,15 +719,6 @@ Rapid prototyping, minimum viable product, Convolutional Neural Network, spectro
 % You must have at least 2 lines in the paragraph with the drop letter
 % (should never be an issue)
 
-\subsection{Subsection Heading Here}
-Subsection text here.
-
-% needed in second column of first page if using \IEEEpubid
-%\IEEEpubidadjcol
-
-\subsubsection{Subsubsection Heading Here}
-Subsubsection text here.
-
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
@@ -966,6 +957,8 @@ The final model that we used was a pre-trained model provided by Tensorflow, who
 
 Fig. 2 shows an example of how our pre structured Tensorflow library generates the spectrograms that it trains itself on. Rather than the spectrogram containing axis information and wasted graph space, we are able to not only contain the picture to just the graph itself, but we also take more advantage of the space to color in pixels. This allows our spectrograms to become more unique from each other, and therefore can be identified by the model easier. 
 
+On this model with our dataset of 5 words (get, post, put, delete, patch), we were able to achieve 100\% accuracy over 1400 epochs. Our accuracy over time and loss over categorical cross entropy is depicted in figures 3 and 4. 
+
 \section{Wrapping our project}
 In this section, we discuss the ways in which we were able to wrap our project into a final product such that it could be compiled and ran given the right dependencies. 
 
@@ -996,6 +989,18 @@ We believe that if we were able to combine the resources of more TTS services an
 \caption{Spectrogram built from Tensorflow}
 \vspace{5mm}
 \includegraphics[scale=1.4]{spectrogram}
+\end{figure}
+
+\begin{figure}[h]
+\caption{Spectrogram built from Tensorflow}
+\vspace{5mm}
+\includegraphics[scale=.7]{first}
+\end{figure}
+
+\begin{figure}[h]
+\caption{Spectrogram built from Tensorflow}
+\vspace{5mm}
+\includegraphics[scale=.7]{second}
 \end{figure}
 % if have a single appendix:
 %\appendix[Proof of the Zonklar Equations]

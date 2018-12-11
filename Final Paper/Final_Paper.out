@@ -1,18 +1,16 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
-\BOOKMARK [2][-]{subsection.1.1}{Subsection Heading Here}{section.1}% 2
-\BOOKMARK [3][-]{subsubsection.1.1.1}{Subsubsection Heading Here}{subsection.1.1}% 3
-\BOOKMARK [1][-]{section.2}{Methodology}{}% 4
-\BOOKMARK [2][-]{subsection.2.1}{Input}{section.2}% 5
-\BOOKMARK [2][-]{subsection.2.2}{Caveats}{section.2}% 6
-\BOOKMARK [2][-]{subsection.2.3}{Output}{section.2}% 7
-\BOOKMARK [2][-]{subsection.2.4}{Additional Functionality}{section.2}% 8
-\BOOKMARK [1][-]{section.3}{Contribution of this work}{}% 9
-\BOOKMARK [1][-]{section.4}{Attempts to train the model}{}% 10
-\BOOKMARK [2][-]{subsection.4.1}{LSTM Recurrent Neural Network}{section.4}% 11
-\BOOKMARK [2][-]{subsection.4.2}{Spectrographic Analysis With a CNN}{section.4}% 12
-\BOOKMARK [1][-]{section.5}{Final Model}{}% 13
-\BOOKMARK [1][-]{section.6}{Wrapping our project}{}% 14
-\BOOKMARK [2][-]{subsection.6.1}{The Flask Micro-framework}{section.6}% 15
-\BOOKMARK [2][-]{subsection.6.2}{Using the Web Service}{section.6}% 16
-\BOOKMARK [2][-]{subsection.6.3}{External Dependencies}{section.6}% 17
-\BOOKMARK [1][-]{section.7}{Conclusion}{}% 18
+\BOOKMARK [1][-]{section.2}{Methodology}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Input}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Caveats}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Output}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Additional Functionality}{section.2}% 6
+\BOOKMARK [1][-]{section.3}{Contribution of this work}{}% 7
+\BOOKMARK [1][-]{section.4}{Attempts to train the model}{}% 8
+\BOOKMARK [2][-]{subsection.4.1}{LSTM Recurrent Neural Network}{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.2}{Spectrographic Analysis With a CNN}{section.4}% 10
+\BOOKMARK [1][-]{section.5}{Final Model}{}% 11
+\BOOKMARK [1][-]{section.6}{Wrapping our project}{}% 12
+\BOOKMARK [2][-]{subsection.6.1}{The Flask Micro-framework}{section.6}% 13
+\BOOKMARK [2][-]{subsection.6.2}{Using the Web Service}{section.6}% 14
+\BOOKMARK [2][-]{subsection.6.3}{External Dependencies}{section.6}% 15
+\BOOKMARK [1][-]{section.7}{Conclusion}{}% 16

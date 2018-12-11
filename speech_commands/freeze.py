@@ -190,7 +190,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--wanted_words',
       type=str,
-      default='get,post,put',
+      default='delete,get,patch,post,put',
       help='Words to use (others will be added to an unknown label)',)
   parser.add_argument(
       '--output_file', type=str, help='Where to save the frozen graph.')

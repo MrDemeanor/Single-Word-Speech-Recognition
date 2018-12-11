@@ -385,7 +385,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--how_many_training_steps',
       type=str,
-      default='15000,3000',
+      default='2000,500',
       help='How many training loops to run',)
   parser.add_argument(
       '--eval_step_interval',
